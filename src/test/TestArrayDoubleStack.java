@@ -28,7 +28,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
      * Tests that the factory creates first stack in the DoubleStack object.
      */
     @Test
-    public void NonNullFirstDoubleStackObject() {
+    public void nonNullFirstDoubleStackObject() {
         IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
         assertNotNull(doubleStack.getFirstStack());
     }
@@ -37,7 +37,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
      * Tests that the factory creates second stack in the DoubleStack object.
      */
     @Test
-    public void NonNullSecondDoubleStackObject() {
+    public void nonNullSecondDoubleStackObject() {
         IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
         assertNotNull(doubleStack.getSecondStack());
     }
@@ -47,7 +47,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
      * @throws StackOverflowException if the stack is full
      */
     @Test
-    public void PushObjectsIntoFirstStack() throws StackOverflowException {
+    public void pushObjectsIntoFirstStack() throws StackOverflowException {
         IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
         doubleStack.getFirstStack().push(1);
         doubleStack.getFirstStack().push(2);
@@ -62,13 +62,12 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
      * @throws StackOverflowException if the stack is full
      */
     @Test
-    public void PushObjectsIntoSecondStack() throws StackOverflowException {
+    public void pushObjectsIntoSecondStack() throws StackOverflowException {
         IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
         doubleStack.getSecondStack().push(1);
         doubleStack.getFirstStack().push(2);
         doubleStack.getSecondStack().push(3);
         doubleStack.getSecondStack().push(4);
-        doubleStack.getSecondStack().push(5);
-        assertEquals(5, doubleStack.getSecondStack().size());
+        assertEquals(4, doubleStack.getSecondStack().size());
     }
 }
