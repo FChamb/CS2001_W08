@@ -4,9 +4,6 @@ import common.StackEmptyException;
 import common.StackOverflowException;
 import interfaces.IStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Stack implements IStack {
     private Object[] stack;
     private final int maxSize;

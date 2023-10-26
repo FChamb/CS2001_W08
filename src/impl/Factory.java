@@ -27,16 +27,24 @@ public final class Factory implements IFactory {
         return factoryInstance;
     }
 
+    /**
+     * Creates an instance of {@link IDoubleStack}.
+     * @param maxSize the maximum size that is shared over both stacks in this double stack
+     * @return the double stack
+     */
     @Override
     public IDoubleStack makeDoubleStack(int maxSize) {
-        IDoubleStack doubleStack = new DoubleStack(maxSize);
-        return doubleStack;
+        return new DoubleStack(maxSize);
     }
 
+    /**
+     * This method creates a DoubleStack-based Queue which conforms with the {@link IQueue} interface.
+     * @param maxSize the maximum size of DoubleStack-based queue
+     * @return the queue
+     */
     @Override
     public IQueue makeDoubleStackQueue(int maxSize) {
-        // TODO need to implement this
-        return null;
+        return new Queue(maxSize);
     }
 
 }
