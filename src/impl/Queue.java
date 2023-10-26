@@ -7,7 +7,7 @@ import interfaces.IQueue;
 public class Queue implements IQueue {
     @Override
     public void enqueue(Object element) throws QueueFullException {
-
+        
     }
 
     @Override

@@ -29,8 +29,8 @@ public final class Factory implements IFactory {
 
     @Override
     public IDoubleStack makeDoubleStack(int maxSize) {
-        // TODO need to implement this
-        return null;
+        IDoubleStack doubleStack = new DoubleStack(maxSize);
+        return doubleStack;
     }
 
     @Override
