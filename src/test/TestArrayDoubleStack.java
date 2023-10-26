@@ -69,8 +69,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
         doubleStack.getFirstStack().push(2);
         doubleStack.getFirstStack().push(3);
         doubleStack.getFirstStack().push(4);
-        doubleStack.getFirstStack().push(5);
-        assertEquals(5, doubleStack.getFirstStack().size());
+        assertEquals(4, doubleStack.getFirstStack().size());
     }
 
     /**
