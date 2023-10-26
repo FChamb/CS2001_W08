@@ -13,6 +13,11 @@ public class Queue implements IQueue {
     private IDoubleStack doubleStack;
     private int size;
 
+    /**
+     * Constructor for a Queue, sets all the private attributes to proper
+     * starting positions.
+     * @param maxSize the max size of the queue
+     */
     public Queue(int maxSize) {
         this.maxSize = maxSize;
         this.queue = new Object[this.maxSize];
@@ -22,7 +27,8 @@ public class Queue implements IQueue {
 
     /**
      * Adds an element to the end of the queue.
-     *
+     * Checks if the queue is empty and throws a QueueFullException if so.
+     * Increases the size argument by one each time.
      * @param element the element to be queued
      * @throws QueueFullException if there is no room in the queue for the new element
      */
@@ -42,7 +48,12 @@ public class Queue implements IQueue {
 
     /**
      * Removes the element at the head of the queue.
-     *
+     * Checks to see if the queue is empty and throws QueueEmptyException if so.
+     * The queue is cleared and then a for loop goes through every element of the
+     * first stack. At each stop, if the second stack is empty, all the items are pushed to
+     * the second stack. And if the first stack is empty, all the items are pushed to the first
+     * stack. Each time, top is called so that on the final instance the proper value is grabbed to
+     * be returned. Alo every item is re enqueued into the queue.
      * @return the element removed
      * @throws QueueEmptyException if the queue is empty
      */
@@ -52,15 +63,18 @@ public class Queue implements IQueue {
             throw new QueueEmptyException();
         }
         Object val = new Object();
+        clear();
         for (int i = 0; i < this.doubleStack.getFirstStack().size(); i++) {
             try {
                 if (this.doubleStack.getSecondStack().isEmpty()) {
                     this.doubleStack.getSecondStack().push(this.doubleStack.getFirstStack().pop());
+                    val = this.doubleStack.getSecondStack().top();
                 } else {
                     this.doubleStack.getFirstStack().push(this.doubleStack.getSecondStack().pop());
+                    val = this.doubleStack.getFirstStack().top();
                 }
-                val = this.doubleStack.getSecondStack().top();
-            } catch (StackOverflowException | StackEmptyException e) {
+                enqueue(this.doubleStack.getSecondStack().top());
+            } catch (StackOverflowException | StackEmptyException | QueueFullException e) {
                 throw new QueueEmptyException();
             }
         }
