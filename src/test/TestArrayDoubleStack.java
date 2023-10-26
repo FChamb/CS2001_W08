@@ -65,9 +65,10 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
     public void pushObjectsIntoSecondStack() throws StackOverflowException {
         IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
         doubleStack.getSecondStack().push(1);
-        doubleStack.getFirstStack().push(2);
+        doubleStack.getSecondStack().push(2);
         doubleStack.getSecondStack().push(3);
         doubleStack.getSecondStack().push(4);
-        assertEquals(4, doubleStack.getSecondStack().size());
+        doubleStack.getSecondStack().push(5);
+        assertEquals(5, doubleStack.getSecondStack().size());
     }
 }
