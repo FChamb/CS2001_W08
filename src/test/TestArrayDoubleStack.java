@@ -1,12 +1,11 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import common.StackOverflowException;
 import org.junit.jupiter.api.Test;
 import common.AbstractFactoryClient;
 import interfaces.IDoubleStack;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests array collection implementation.
@@ -43,7 +42,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
     }
 
     /**
-     * Tests that push properly adds elements to the first stack.
+     * Tests that push properly added elements to the first stack.
      * @throws StackOverflowException if the stack is full
      */
     @Test
@@ -58,7 +57,7 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
     }
 
     /**
-     * Tests that push properly adds elements to the second stack.
+     * Tests that push properly added elements to the second stack.
      * @throws StackOverflowException if the stack is full
      */
     @Test
@@ -70,5 +69,41 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
         doubleStack.getSecondStack().push(4);
         doubleStack.getSecondStack().push(5);
         assertEquals(5, doubleStack.getSecondStack().size());
+    }
+
+    /**
+     * Tests that push properly added elements to both stack.
+     * @throws StackOverflowException if the stack is full
+     */
+    @Test
+    public void pushObjectsIntoBothStack() throws StackOverflowException {
+        IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
+        doubleStack.getFirstStack().push(1);
+        doubleStack.getSecondStack().push(2);
+        doubleStack.getFirstStack().push(3);
+        doubleStack.getSecondStack().push(4);
+        doubleStack.getSecondStack().push(5);
+        assertEquals(2, doubleStack.getFirstStack().size());
+        assertEquals(3, doubleStack.getSecondStack().size());
+    }
+
+    /**
+     * Tests that error is thrown when too many elements are added to stack.
+     * @throws StackOverflowException if the stack is full
+     */
+    @Test
+    public void pushObjectsUntilMaxStack() throws StackOverflowException {
+        IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
+        doubleStack.getFirstStack().push(1);
+        doubleStack.getFirstStack().push(2);
+        doubleStack.getFirstStack().push(3);
+        doubleStack.getFirstStack().push(4);
+        doubleStack.getFirstStack().push(5);
+        doubleStack.getSecondStack().push(6);
+        doubleStack.getSecondStack().push(7);
+        doubleStack.getSecondStack().push(8);
+        doubleStack.getSecondStack().push(9);
+        doubleStack.getSecondStack().push(10);
+        assertThrows(StackOverflowException.class, () -> doubleStack.getSecondStack().push(11));
     }
 }
