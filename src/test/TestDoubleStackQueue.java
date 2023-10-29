@@ -228,4 +228,18 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         queue.dequeue();
         assertThrows(QueueEmptyException.class, () -> queue.dequeue());
     }
+
+    /**
+     * Tests that the queue can accept different objects.
+     * @throws QueueFullException if the queue is full
+     */
+    @Test
+    public void queueAddDifferentObjects() throws QueueFullException {
+        IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue("Dog");
+        queue.enqueue("Cat");
+        assertFalse(queue.isEmpty());
+    }
 }

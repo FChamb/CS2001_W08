@@ -354,4 +354,18 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
         assertThrows(StackOverflowException.class, () -> doubleStack.getFirstStack().push(1));
         assertThrows(StackOverflowException.class, () -> doubleStack.getSecondStack().push(2));
     }
+
+    /**
+     * Tests that stack can hold different objects.
+     * @throws StackOverflowException if the stack is full
+     */
+    @Test
+    public void pushToStackWithDifferentObjects() throws StackOverflowException {
+        IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
+        doubleStack.getFirstStack().push(1);
+        doubleStack.getFirstStack().push(2);
+        doubleStack.getFirstStack().push("Dog");
+        doubleStack.getFirstStack().push("Cat");
+        assertFalse(doubleStack.getFirstStack().isEmpty());
+    }
 }
