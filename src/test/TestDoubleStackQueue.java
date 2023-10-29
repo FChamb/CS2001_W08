@@ -203,7 +203,6 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         queue.enqueue(9);
         queue.enqueue(10);
         queue.clear();
-        queue.dequeue();
         assertThrows(QueueEmptyException.class, () -> queue.dequeue());
     }
 
