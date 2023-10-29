@@ -61,12 +61,7 @@ public class Stack implements IStack {
         if (isEmpty()) {
             throw new StackEmptyException();
         }
-        Object val;
-        if (this.firstStack) {
-            val = this.stack[this.size];
-        } else {
-            val = this.stack[this.maxSize + this.size];
-        }
+        Object val = this.stack[this.size - 1];
         this.size--;
         return val;
     }
@@ -83,13 +78,7 @@ public class Stack implements IStack {
         if (isEmpty()) {
             throw new StackEmptyException();
         }
-        Object val;
-        if (this.firstStack) {
-            val = this.stack[this.size];
-        } else {
-            val = this.stack[this.maxSize + this.size];
-        }
-        return val;
+        return this.stack[this.size - 1];
     }
 
     /**
