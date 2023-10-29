@@ -286,6 +286,16 @@ public class TestArrayDoubleStack extends AbstractFactoryClient {
     }
 
     /**
+     * Tests that clear returns proper output if called on an empty list.
+     */
+    @Test
+    public void clearEmptyStack() {
+        IDoubleStack doubleStack = getFactory().makeDoubleStack(DEFAULT_MAX_SIZE);
+        doubleStack.getFirstStack().clear();
+        assertTrue(doubleStack.getFirstStack().isEmpty());
+    }
+
+    /**
      * Tests that clears both first and second stack after filling with elements and then add elements again.
      * @throws StackOverflowException if the stack is full
      */
