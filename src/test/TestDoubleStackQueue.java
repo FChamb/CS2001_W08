@@ -2,6 +2,8 @@ package test;
 
 import common.QueueEmptyException;
 import common.QueueFullException;
+import common.StackOverflowException;
+import interfaces.IDoubleStack;
 import org.junit.jupiter.api.Test;
 import common.AbstractFactoryClient;
 import interfaces.IQueue;
@@ -241,5 +243,15 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         queue.enqueue("Dog");
         queue.enqueue("Cat");
         assertFalse(queue.isEmpty());
+    }
+
+    /**
+     * Tests that creates a queue of size zero, and attempts to add element.
+     * @throws StackOverflowException if the stack is full
+     */
+    @Test
+    public void pushToStackWithSizeZero() throws StackOverflowException {
+        IQueue queue = getFactory().makeDoubleStackQueue(0);
+        assertThrows(StackOverflowException.class, () -> queue.enqueue(1));
     }
 }
