@@ -246,11 +246,10 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
 
     /**
      * Tests that creates a queue of size zero, and attempts to add element.
-     * @throws QueueFullException if the queue is full
      */
     @Test
-    public void pushToStackWithSizeZero() throws QueueFullException {
+    public void pushToStackWithSizeZero() {
         IQueue queue = getFactory().makeDoubleStackQueue(0);
-        assertThrows(StackOverflowException.class, () -> queue.enqueue(1));
+        assertThrows(QueueFullException.class, () -> queue.enqueue(1));
     }
 }
