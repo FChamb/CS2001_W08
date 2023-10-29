@@ -37,10 +37,10 @@ public class Queue implements IQueue {
         }
         try {
             this.doubleStack.getFirstStack().push(element);
+            this.size++;
         } catch (StackOverflowException e) {
             throw new QueueFullException();
         }
-        this.size++;
     }
 
     /**
