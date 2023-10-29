@@ -3,7 +3,6 @@ package test;
 import common.QueueEmptyException;
 import common.QueueFullException;
 import common.StackOverflowException;
-import interfaces.IDoubleStack;
 import org.junit.jupiter.api.Test;
 import common.AbstractFactoryClient;
 import interfaces.IQueue;
@@ -247,10 +246,10 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
 
     /**
      * Tests that creates a queue of size zero, and attempts to add element.
-     * @throws StackOverflowException if the stack is full
+     * @throws QueueFullException if the queue is full
      */
     @Test
-    public void pushToStackWithSizeZero() throws StackOverflowException {
+    public void pushToStackWithSizeZero() throws QueueFullException {
         IQueue queue = getFactory().makeDoubleStackQueue(0);
         assertThrows(StackOverflowException.class, () -> queue.enqueue(1));
     }
