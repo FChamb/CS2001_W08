@@ -9,7 +9,6 @@ import interfaces.IQueue;
 
 public class Queue implements IQueue {
     private final int maxSize;
-    private Object[] queue;
     private IDoubleStack doubleStack;
     private int size;
 
@@ -20,8 +19,7 @@ public class Queue implements IQueue {
      */
     public Queue(int maxSize) {
         this.maxSize = maxSize;
-        this.queue = new Object[this.maxSize];
-        this.doubleStack = new DoubleStack(this.maxSize);
+        this.doubleStack = new DoubleStack(this.maxSize * 2);
         this.size = 0;
     }
 
@@ -37,7 +35,6 @@ public class Queue implements IQueue {
         if (size() == this.maxSize) {
             throw new QueueFullException();
         }
-        this.queue[this.size] = element;
         try {
             this.doubleStack.getFirstStack().push(element);
         } catch (StackOverflowException e) {
@@ -64,21 +61,19 @@ public class Queue implements IQueue {
         }
         Object val = new Object();
         clear();
-        for (int i = 0; i < this.doubleStack.getFirstStack().size(); i++) {
-            try {
-                if (this.doubleStack.getSecondStack().isEmpty()) {
+        try {
+            if (this.doubleStack.getSecondStack().isEmpty()) {
+                while (!this.doubleStack.getFirstStack().isEmpty()) {
                     this.doubleStack.getSecondStack().push(this.doubleStack.getFirstStack().pop());
-                    val = this.doubleStack.getSecondStack().top();
-                } else {
-                    this.doubleStack.getFirstStack().push(this.doubleStack.getSecondStack().pop());
-                    val = this.doubleStack.getFirstStack().top();
                 }
-                enqueue(this.doubleStack.getSecondStack().top());
-            } catch (StackOverflowException | StackEmptyException | QueueFullException e) {
-                throw new QueueEmptyException();
             }
+            if (!this.doubleStack.getSecondStack().isEmpty()) {
+                val = this.doubleStack.getSecondStack().pop();
+                this.size--;
+            }
+        } catch (StackOverflowException | StackEmptyException e) {
+            throw new QueueEmptyException();
         }
-        this.size--;
         return val;
     }
 
@@ -105,7 +100,8 @@ public class Queue implements IQueue {
      */
     @Override
     public void clear() {
-        this.queue = new Object[this.maxSize];
+        this.doubleStack.getFirstStack().clear();
+        this.doubleStack.getSecondStack().clear();
         this.size = 0;
     }
 }

@@ -39,52 +39,24 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
     }
 
     /**
-     * Tests that the queue can properly add elements when a queue is created with even
-     * max size.
+     * Tests that the queue can properly add elements when a queue is created.
      * @throws QueueFullException is the stack is full
      */
     @Test
-    public void enqueueQueueElementsEven() throws QueueFullException {
+    public void enqueueQueueElements() throws QueueFullException {
         IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
         queue.enqueue(1);
         assertEquals(1, queue.size());
     }
 
     /**
-     * Tests that the queue can properly add elements when a queue is created with odd
-     * max size.
-     * @throws QueueFullException is the stack is full
-     */
-    @Test
-    public void enqueueQueueElementsOdd() throws QueueFullException {
-        IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE - 1);
-        queue.enqueue(1);
-        assertEquals(1, queue.size());
-    }
-
-    /**
-     * Tests that the queue can properly add and remove elements when a queue is created with even
-     * max size.
+     * Tests that the queue can properly add and remove elements when a queue is created.
      * @throws QueueFullException if the stack is full
      * @throws QueueEmptyException if the stack is empty
      */
     @Test
-    public void dequeueQueueElementsEven() throws QueueFullException, QueueEmptyException {
+    public void dequeueQueueElements() throws QueueFullException, QueueEmptyException {
         IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
-        queue.enqueue(1);
-        queue.dequeue();
-        assertEquals(0, queue.size());
-    }
-
-    /**
-     * Tests that the queue can properly add and remove elements when a queue is created with odd
-     * max size.
-     * @throws QueueFullException if the stack is full
-     * @throws QueueEmptyException if the stack is empty
-     */
-    @Test
-    public void dequeueQueueElementsOdd() throws QueueFullException, QueueEmptyException {
-        IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE - 1);
         queue.enqueue(1);
         queue.dequeue();
         assertEquals(0, queue.size());
