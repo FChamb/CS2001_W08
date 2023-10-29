@@ -141,7 +141,9 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
         queue.enqueue(1);
         queue.enqueue(2);
+        System.out.println(queue.size());
         queue.dequeue();
+        System.out.println(queue.size());
         queue.enqueue(3);
         queue.enqueue(4);
         assertEquals(3, queue.size());
