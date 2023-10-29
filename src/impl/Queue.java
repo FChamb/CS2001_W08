@@ -78,6 +78,7 @@ public class Queue implements IQueue {
                 throw new QueueEmptyException();
             }
         }
+        this.size--;
         return val;
     }
 
