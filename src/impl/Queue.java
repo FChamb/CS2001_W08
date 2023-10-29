@@ -60,7 +60,6 @@ public class Queue implements IQueue {
             throw new QueueEmptyException();
         }
         Object val = new Object();
-        clear();
         try {
             if (this.doubleStack.getSecondStack().isEmpty()) {
                 while (!this.doubleStack.getFirstStack().isEmpty()) {
