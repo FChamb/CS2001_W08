@@ -112,6 +112,7 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         queue.enqueue(2);
         queue.enqueue(3);
         queue.clear();
+        assertTrue(queue.isEmpty());
         queue.enqueue(1);
         queue.enqueue(2);
         assertEquals(2, queue.size());
@@ -172,16 +173,16 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
         queue.enqueue(8);
         queue.enqueue(9);
         queue.enqueue(10);
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
+        assertEquals(1, queue.dequeue());
+        assertEquals(2, queue.dequeue());
+        assertEquals(3, queue.dequeue());
+        assertEquals(4, queue.dequeue());
+        assertEquals(5, queue.dequeue());
+        assertEquals(6, queue.dequeue());
+        assertEquals(7, queue.dequeue());
+        assertEquals(8, queue.dequeue());
+        assertEquals(9, queue.dequeue());
+        assertEquals(10, queue.dequeue());
         assertEquals(0, queue.size());
     }
 
@@ -191,7 +192,7 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
      * @throws QueueFullException if the queue is full
      */
     @Test
-    public void queueClearAndDequeue() throws QueueFullException, QueueEmptyException {
+    public void queueClearAndDequeue() throws QueueFullException {
         IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
         queue.enqueue(1);
         queue.enqueue(2);
@@ -210,10 +211,9 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
     /**
      * Tests that the proper exception is thrown when dequeue is called on an
      * empty queue.
-     * @throws QueueEmptyException if the queue is empty
      */
     @Test
-    public void queueDequeueEmpty() throws QueueEmptyException {
+    public void queueDequeueEmpty() {
         IQueue queue = getFactory().makeDoubleStackQueue(DEFAULT_MAX_SIZE);
         assertThrows(QueueEmptyException.class, () -> queue.dequeue());
     }
@@ -248,7 +248,7 @@ public class TestDoubleStackQueue extends AbstractFactoryClient {
      * Tests that creates a queue of size zero, and attempts to add element.
      */
     @Test
-    public void pushToStackWithSizeZero() {
+    public void enqueueToQueueWithSizeZero() {
         IQueue queue = getFactory().makeDoubleStackQueue(0);
         assertThrows(QueueFullException.class, () -> queue.enqueue(1));
     }
