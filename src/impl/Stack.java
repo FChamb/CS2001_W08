@@ -109,8 +109,7 @@ public class Stack implements IStack {
             while (!isEmpty()) {
                 pop();
             }
-        } catch (StackEmptyException e) {
-            System.err.println("Error: Stack is empty");
+        } catch (StackEmptyException ignored) {
         }
     }
 }

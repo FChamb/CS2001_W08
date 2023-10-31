@@ -70,6 +70,11 @@ public class Queue implements IQueue {
                 val = this.doubleStack.getSecondStack().pop();
                 this.size--;
             }
+            if (this.doubleStack.getFirstStack().isEmpty()) {
+                while (!this.doubleStack.getSecondStack().isEmpty()) {
+                    this.doubleStack.getFirstStack().push(this.doubleStack.getSecondStack().pop());
+                }
+            }
         } catch (StackOverflowException | StackEmptyException e) {
             throw new QueueEmptyException();
         }
